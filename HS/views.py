@@ -23,4 +23,9 @@ def assignment(request):
 #              'assignments':assignments,
 #         }
 #     )
-
+# Create your views here.
+def index(request):
+    return render(
+        request,
+        'HS/account.html'
+    )
