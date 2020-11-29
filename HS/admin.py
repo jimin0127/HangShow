@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from .models import Assignment, User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
@@ -7,7 +7,10 @@ from django.utils.translation import ugettext_lazy as _
 from .forms import UserCreationForm
 from .models import User
 
+# Register your models here.
+admin.site.register(Assignment)
 
+# Register your models here.
 class UserAdmin(BaseUserAdmin):
     form = UserCreationForm
 
@@ -24,3 +27,6 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
+        # list_display_links = (
+        #     'id',
+        # )

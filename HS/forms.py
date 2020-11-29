@@ -1,6 +1,7 @@
 from django import forms
 from .models import User
 from django.utils.translation import ugettext_lazy as _
+from .models import Assignment
 
 
 class UserCreationForm(forms.ModelForm):
@@ -13,3 +14,9 @@ class UserCreationForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('id', 'name', 'student_id', 'email', 'password')
+
+
+class Assignment(forms.ModelForm):
+    class Meta:
+        model=Assignment
+        fields=('subject','content',)
