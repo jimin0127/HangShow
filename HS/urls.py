@@ -18,12 +18,14 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
+    path('', views.index, name="index"),
+    path('join/', views.join, name="join"),
+    path('login/', views.login, name="login"),
+    path('logout/', views.logout, name="logout"),
+
+
+    # path('assignment/', views.assignment, name='assignment'),
+    # path('',views.AssignmentList.as_view()),
     # path('', views.index),
-    # path('join/', views.join),
-
-
-    path('assignment/', views.assignment, name='assignment'),
-    path('',views.AssignmentList.as_view()),
-    path('', views.index),
 ]
 
