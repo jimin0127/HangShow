@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 
+from HangShow import settings
+
 class Assignment(models.Model):
     title = models.CharField(max_length=30)
     subject = models.CharField(max_length=30)

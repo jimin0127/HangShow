@@ -1,9 +1,11 @@
+
+from django.contrib import auth
 from datetime import timezone
 from django.shortcuts import render, redirect
 from .forms import Assignmentform
 from .models import *
 from .forms import UserCreationForm
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import Assignment
 from django.views.generic import ListView
 from .models import Assignment
@@ -52,3 +54,31 @@ def join(request):
         form = UserCreationForm()
         return render(request, 'HS/account.html', {'form': form})
 
+
+def login(request):
+    print("login")
+    if request.method == 'POST':
+        name = request.POST['name']
+        password = request.POST['password']
+        print(name)
+
+        user = auth.authenticate(request, name=name, password=password)
+        #   print(user.name)
+
+        if user is not None: # 로그인에 실패하면
+            auth.login(request, user)
+            return render(request, 'HS/index.html',{})
+        else:
+            print("로그인 실패")
+            return render(request, 'HS/index.html', {'error': '에러'}) # 로그인 실패
+    else:
+        print("login2")
+        return render(request, 'HS/login.html', {'error': '에러'})
+
+def logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        return render(request, 'HS/index.html', {'error': '에러'})
+    else:
+        auth.logout(request)
+        return render(request, 'HS/index.html', {'error': '에러'})
