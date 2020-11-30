@@ -1,7 +1,7 @@
 from django import forms
 from .models import Assignment
 
-class Assignment(forms.ModelForm):
+class Assignmentform(forms.ModelForm):
     class Meta:
         model=Assignment
-        fields=('subject','content',)
+        fields=('title','subject','content','created','endline','author')

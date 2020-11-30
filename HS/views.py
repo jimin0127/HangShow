@@ -1,31 +1,38 @@
-from django.shortcuts import render
-from .forms import Assignment
+from datetime import timezone
+from django.shortcuts import render, redirect
+from .forms import Assignmentform
 from django.views.generic import ListView
 from .models import Assignment
 
 class AssignmentList(ListView):
     model=Assignment
 
-    def get_queryset(self):
-        return Assignment.objects.order_by('-created')
+    # def get_queryset(self):
+    #     return Assignment.objects.order_by('-created')
 
-def assignment(request):
-    form = Assignment()
-    return render(request, 'HS/assignment.html', {'form': form})
+def calendar(request):
+    assignment=Assignment.objects.all()
+    return render(
+        request,
+        'HS/calendar.html',
+        {
+            'assignments':assignment,
+        }
+    )
 
-# def index(request):
-#     assignments=Assignment.objects.all()
-#
-#     return render(
-#         request,
-#         'HS/assignment_list.html',
-#         {
-#              'assignments':assignments,
-#         }
-#     )
-# Create your views here.
 def index(request):
     return render(
         request,
-        'HS/account.html'
+        'HS/index.html'
     )
+
+def getAssignment(request):
+    if request.method=="POST":
+        form=Assignmentform(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/getassignment.html', {'form': form})
+    else:
+        form = Assignmentform()
+        return render(request, 'HS/getassignment.html', {'form': form})
+

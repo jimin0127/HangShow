@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
 
 class Assignment(models.Model):
     title = models.CharField(max_length=30)
@@ -9,7 +8,7 @@ class Assignment(models.Model):
     content = models.TextField()
     created = models.DateField()
     endline = models.DateField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.CharField(max_length=30)
 
     def __str__(self):
         return '{}:{}'.format(self.title,self.author)
@@ -30,11 +29,6 @@ class UserManager(BaseUserManager) :
         return user
 
     def create_superuser(self, student_id, name, email, password):
-        # user = self.create_user(
-        #     name=name,
-        #     student_id=student_id,
-        #     email=self.normalize_email(email)
-        # )
         user = self.model(
             id=id,
             name=name,
@@ -46,7 +40,6 @@ class UserManager(BaseUserManager) :
         user.is_superuser = True
         user.save(using=self._db)
         return user
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
@@ -78,7 +71,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         unique=True,
 
     )
-
     class Meta:
         verbose_name = _('user')
         verbose_name_plural = _('users')
