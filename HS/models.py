@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager,PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
 
 class Assignment(models.Model):
@@ -13,30 +13,29 @@ class Assignment(models.Model):
     def __str__(self):
         return '{}:{}'.format(self.title,self.author)
 
-class UserManager(BaseUserManager) :
+class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, id, name, student_id, email, password):
-        if not email or name or student_id :
+    def create_user(self, name, student_id, email, password):
+        if not email and name and student_id:
             raise ValueError('must have user email')
         user = self.model(
-            id=id,
             name=name,
             student_id=student_id,
             email=self.normalize_email(email)
         )
+        user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, student_id, name, email, password):
-        user = self.model(
-            id=id,
+
+    def create_superuser(self, name, student_id, email, password):
+        user = self.create_user(
             name=name,
             student_id=student_id,
             email=self.normalize_email(email),
             password=password
         )
-        user.set_password(password)
         user.is_superuser = True
         user.save(using=self._db)
         return user
@@ -80,6 +79,27 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'name'
     REQUIRED_FIELDS = ['student_id', 'email']
+
+    def __str__(self):
+        return self.id
+
+    def has_perm(self, perm, obj=None):
+        return True
+
+    def has_module_perms(self, app_label):
+        return True
+
+    def get_username(self):
+        return self.id
+
+    def get_name(self):
+        return self.name
+
+    def get_student_id(self):
+        return self.student_id
+
+    def get_user_email(self):
+        return self.email
 
     @property
     def is_staff(self):

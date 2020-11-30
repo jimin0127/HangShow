@@ -1,6 +1,13 @@
+
 from datetime import timezone
 from django.shortcuts import render, redirect
 from .forms import Assignmentform
+
+from .models import *
+from .forms import UserCreationForm
+from django.shortcuts import render
+from .forms import Assignment
+
 from django.views.generic import ListView
 from .models import Assignment
 
@@ -26,6 +33,7 @@ def index(request):
         'HS/index.html'
     )
 
+
 def getAssignment(request):
     if request.method=="POST":
         form=Assignmentform(request.POST)
@@ -35,4 +43,14 @@ def getAssignment(request):
     else:
         form = Assignmentform()
         return render(request, 'HS/getassignment.html', {'form': form})
+
+def join(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return render(request, 'HS/account.html', {'form': form})
+    else:
+        form = UserCreationForm()
+        return render(request, 'HS/account.html', {'form': form})
 
