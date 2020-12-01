@@ -36,7 +36,7 @@ function getToday(){
        {% for i in assignments %}
     {
         title: "{{ i.title }}",
-        start: '{{ i.created|date:'yy-m-d' }}',
+        start: '{{ i.endline|date:'yy-m-d' }}',
 
     },
     {% endfor %}
@@ -65,9 +65,11 @@ function getToday(){
   <div class="row">
     <div class="col-md-10">
       <h1 align="center">{{ assignments.all.model.ban }}</h1>
-        <div id='calendar'></div><br>
-      <a href="assignment" class="btn btn-success" type="button">add</a><br>
+        <div id='calendar'><br>
+           <a href="assignment" class="btn btn-default" type="button">add</a><br>
+        </div><br>
     </div>
+
     <div class="col-md-2">
       <div class="card my-2">
           <h5 class="card-header">Categories</h5>

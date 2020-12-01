@@ -7,6 +7,11 @@
 <script src='/static/HS/packages/interaction/main.js'></script>
 <script src='/static/HS/packages/daygrid/main.js'></script>
 <script>
+
+var a="{{user.student_id}}"
+var b=a.substring(1,2);
+<!--document.write(b);-->
+
 function getToday(){
     var date = new Date();
     var year = date.getFullYear();
@@ -36,7 +41,7 @@ function getToday(){
        {% for i in assignments %}
     {
         title: "{{ i.title }}",
-        start: '{{ i.created|date:'yy-m-d' }}',
+        start: '{{ i.endline|date:'yy-m-d' }}',
 
     },
     {% endfor %}
@@ -65,7 +70,8 @@ function getToday(){
   <div class="row">
     <div class="col-md-12">
       <h1 align="center">{{ assignments.all.model.ban }}</h1>
-        <div id='calendar'></div><br>
+        <div id='calendar'><br>
+        </div><br>
     </div>
   </div>
 </div>

@@ -12,6 +12,9 @@ admin.site.register(Assignment)
 admin.site.register(class_2_1)
 admin.site.register(class_2_2)
 admin.site.register(class_2_3)
+admin.site.register(class_2_4)
+admin.site.register(class_2_5)
+admin.site.register(class_2_6)
 
 # Register your models here.
 class UserAdmin(BaseUserAdmin):
