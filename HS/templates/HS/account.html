@@ -1,14 +1,15 @@
 {% extends 'HS/basetea.html' %}
 
-<body>
 
 {% block content %}
+        <div id="container">
+    <div class="col-lg-4">
+    <div class="jumbotron" style="padding-top: 20px;">
     <form action="." method="post">
         {% csrf_token %}
         <div>
             {% for field in form %}
-
-                    <div class="form-group">
+                    <div class="form-group" align="center">
                         <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" placeholder="{{ field.label|upper}}">
                     </div>
                     {% for error in field.errors %}
@@ -21,6 +22,9 @@
         </div>
     </form>
     </div>
+    </div>
+        </div>
+
 {% endblock content %}
 
 
