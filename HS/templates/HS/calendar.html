@@ -56,5 +56,53 @@ function getToday(){
     margin: 0 auto;
   }
 </style>
+
+</head>
+
+<body>
+<h1 align="center">{{ assignments.all.model.ban }}</h1>
+ <div id='calendar'></div>
+<!-- {% for p in assignments%}-->
+<!-- {{p.created|date:'yy-m-d'}}-->
+<!--{%endfor%}-->
+
+
+<div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="2-1">2-1</a>
+                  </li>
+                  <li>
+                    <a href="2-2">2-2</a>
+                  </li>
+                  <li>
+                    <a href="2-3">2-3</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">2-4</a>
+                  </li>
+                  <li>
+                    <a href="#">2-5</a>
+                  </li>
+                  <li>
+                    <a href="#">2-6</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+</body>
+</html>
+
  <div id='calendar'></div>
 {% endblock%}
+

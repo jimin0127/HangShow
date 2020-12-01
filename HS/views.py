@@ -26,6 +26,36 @@ def calendar(request):
         }
     )
 
+def calendar2_1(request):
+    assignment=class_2_1.objects.all()
+    return render(
+        request,
+        'HS/calendar.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+def calendar2_2(request):
+    assignment=class_2_2.objects.all()
+    return render(
+        request,
+        'HS/calendar.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+def calendar2_3(request):
+    assignment=class_2_3.objects.all()
+    return render(
+        request,
+        'HS/calendar.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
 def index(request):
     return render(
         request,
@@ -56,20 +86,17 @@ def join(request):
 
 
 def login(request):
-    print("login")
     if request.method == 'POST':
         name = request.POST['name']
         password = request.POST['password']
         print(name)
 
         user = auth.authenticate(request, name=name, password=password)
-        #   print(user.name)
 
-        if user is not None: # 로그인에 실패하면
+        if user is not None: # 로그인에 성공하면
             auth.login(request, user)
-            return render(request, 'HS/index.html',{})
+            return render(request, 'HS/calendar.html',{})
         else:
-            print("로그인 실패")
             return render(request, 'HS/index.html', {'error': '에러'}) # 로그인 실패
     else:
         print("login2")
