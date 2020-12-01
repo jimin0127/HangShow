@@ -20,7 +20,7 @@ def calendar(request):
     assignment=Assignment.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -30,7 +30,7 @@ def calendar2_1(request):
     assignment=class_2_1.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -40,7 +40,7 @@ def calendar2_2(request):
     assignment=class_2_2.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -50,7 +50,7 @@ def calendar2_3(request):
     assignment=class_2_3.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -94,8 +94,12 @@ def login(request):
         user = auth.authenticate(request, name=name, password=password)
 
         if user is not None: # 로그인에 성공하면
-            auth.login(request, user)
-            return render(request, 'HS/calendar.html',{})
+            if name=="hhy":
+                auth.login(request, user)
+                return render(request, 'HS/calendartea.html', {})
+            else:
+                auth.login(request, user)
+                return render(request, 'HS/calendarstu.html', {})
         else:
             return render(request, 'HS/index.html', {'error': '에러'}) # 로그인 실패
     else:

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Assignment, User
+from .models import *
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import ugettext_lazy as _
@@ -9,6 +9,9 @@ from .models import User
 
 # Register your models here.
 admin.site.register(Assignment)
+admin.site.register(class_2_1)
+admin.site.register(class_2_2)
+admin.site.register(class_2_3)
 
 # Register your models here.
 class UserAdmin(BaseUserAdmin):

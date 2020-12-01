@@ -1,0 +1,30 @@
+{% extends 'HS/basestu.html' %}
+{% block content %}
+  <!-- Page Content -->
+  <div class="container">
+<table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">제목</th>
+          <th scope="col">과목</th>
+          <th scope="col">선생님</th>
+          <th scope="col">작성일</th>
+          <th scope="col">마감일</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for p in object_list %}
+        <tr>
+          <td>{{ p.title }}</td>
+          <td>{{p.subject }}</td>
+          <td>{{p.author }}</td>
+          <td>{{p.created|date:'yy-m-d' }}</td>
+          <td>{{p.endline|date:'yy-m-d' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+{% endblock%}

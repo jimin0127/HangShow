@@ -1,8 +1,9 @@
 from django import forms
+from django.forms import widgets
+
 from .models import User
 from django.utils.translation import ugettext_lazy as _
 from .models import Assignment
-
 
 class UserCreationForm(forms.ModelForm):
     id = forms.CharField()
