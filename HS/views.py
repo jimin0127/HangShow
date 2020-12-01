@@ -104,6 +104,7 @@ def detail(request):
                        'content':content
                        }
 
+
                       )
     else:
         return render(request, 'HS/index.html', {})
