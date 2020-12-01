@@ -1,21 +1,20 @@
+
 from django.contrib import auth
 from datetime import timezone
 from django.shortcuts import render, redirect
 from .forms import Assignmentform
-
 from .models import *
 from .forms import UserCreationForm
 from django.shortcuts import render, redirect
 from .forms import Assignment
-
 from django.views.generic import ListView
 from .models import Assignment
 
 class AssignmentList(ListView):
     model=Assignment
 
-    # def get_queryset(self):
-    #     return Assignment.objects.order_by('-created')
+    def get_queryset(self):
+        return Assignment.objects.order_by('-created')
 
 def calendar(request):
     assignment=Assignment.objects.all()
@@ -73,6 +72,7 @@ def getAssignment(request):
     else:
         form = Assignmentform()
         return render(request, 'HS/getassignment.html', {'form': form})
+
 
 def join(request):
     if request.method == 'POST':

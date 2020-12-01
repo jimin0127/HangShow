@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8' />
+{% extends 'HS/base.html' %}
+
+{% block content %}
 <link href='/static/HS/packages/core/main.css' rel='stylesheet' />
 <link href='/static/HS/packages/daygrid/main.css' rel='stylesheet' />
 <script src='/static/HS/packages/core/main.js'></script>
@@ -49,8 +48,6 @@ function getToday(){
 </script>
 <style>
   body {
-    margin: 40px 10px;
-    padding: 0;
     font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
     font-size: 14px;
   }
@@ -59,6 +56,7 @@ function getToday(){
     margin: 0 auto;
   }
 </style>
+
 </head>
 
 <body>
@@ -104,3 +102,7 @@ function getToday(){
         </div>
 </body>
 </html>
+
+ <div id='calendar'></div>
+{% endblock%}
+
