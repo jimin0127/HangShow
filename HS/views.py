@@ -2,7 +2,8 @@
 from django.contrib import auth
 from datetime import timezone
 from django.shortcuts import render, redirect
-from .forms import Assignmentform
+from .forms import *
+from .models import class_2_1
 from .models import *
 from .forms import UserCreationForm
 from django.shortcuts import render, redirect
@@ -16,11 +17,12 @@ class AssignmentList(ListView):
     def get_queryset(self):
         return Assignment.objects.order_by('-created')
 
+# calendar views
 def calendar(request):
     assignment=Assignment.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -30,7 +32,7 @@ def calendar2_1(request):
     assignment=class_2_1.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -40,7 +42,7 @@ def calendar2_2(request):
     assignment=class_2_2.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -50,7 +52,7 @@ def calendar2_3(request):
     assignment=class_2_3.objects.all()
     return render(
         request,
-        'HS/calendar.html',
+        'HS/calendartea.html',
         {
             'assignments':assignment,
         }
@@ -63,6 +65,7 @@ def index(request):
     )
 
 
+# assignment views
 def getAssignment(request):
     if request.method=="POST":
         form=Assignmentform(request.POST)
@@ -71,6 +74,36 @@ def getAssignment(request):
             return render(request, 'HS/getassignment.html', {'form': form})
     else:
         form = Assignmentform()
+        return render(request, 'HS/getassignment.html', {'form': form})
+
+def getAssignment2_1(request):
+    if request.method=="POST":
+        form=Assignmentform2_1(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/getassignment.html', {'form': form})
+    else:
+        form = Assignmentform2_1()
+        return render(request, 'HS/getassignment.html', {'form': form})
+
+def getAssignment2_2(request):
+    if request.method=="POST":
+        form=Assignmentform2_2(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/getassignment.html', {'form': form})
+    else:
+        form = Assignmentform2_2()
+        return render(request, 'HS/getassignment.html', {'form': form})
+
+def getAssignment2_3(request):
+    if request.method=="POST":
+        form=Assignmentform2_3(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/getassignment.html', {'form': form})
+    else:
+        form = Assignmentform2_3()
         return render(request, 'HS/getassignment.html', {'form': form})
 
 
@@ -94,8 +127,12 @@ def login(request):
         user = auth.authenticate(request, name=name, password=password)
 
         if user is not None: # 로그인에 성공하면
-            auth.login(request, user)
-            return render(request, 'HS/calendar.html',{})
+            if name=="hhy":
+                auth.login(request, user)
+                return render(request, 'HS/calendartea.html', {})
+            else:
+                auth.login(request, user)
+                return render(request, 'HS/calendarstu.html', {})
         else:
             return render(request, 'HS/index.html', {'error': '에러'}) # 로그인 실패
     else:

@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from HangShow import settings
 
-
+# assignment model
 class Assignment(models.Model):
     title = models.CharField(max_length=30)
     subject = models.CharField(max_length=30)
@@ -15,6 +15,7 @@ class Assignment(models.Model):
 
     def __str__(self):
         return '{}:{}'.format(self.title, self.author)
+
 class class_2_1(models.Model):
     ban = "2-1"
     title = models.CharField(max_length=30)

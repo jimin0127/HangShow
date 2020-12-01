@@ -1,8 +1,12 @@
 from django import forms
+from django.forms import widgets
+
 from .models import User
 from django.utils.translation import ugettext_lazy as _
 from .models import Assignment
-
+from .models import class_2_1
+from .models import class_2_2
+from .models import class_2_3
 
 class UserCreationForm(forms.ModelForm):
     id = forms.CharField()
@@ -23,7 +27,6 @@ class UserCreationForm(forms.ModelForm):
         fields = ('id', 'name', 'student_id', 'email')
 
     def clean_password2(self):
-        # 두 비밀번호 입력 일치 확인
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
@@ -42,4 +45,19 @@ class UserCreationForm(forms.ModelForm):
 class Assignmentform(forms.ModelForm):
     class Meta:
         model = Assignment
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_1(forms.ModelForm):
+    class Meta:
+        model = class_2_1
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_2(forms.ModelForm):
+    class Meta:
+        model = class_2_2
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_3(forms.ModelForm):
+    class Meta:
+        model = class_2_3
         fields = ('title', 'subject', 'content', 'created', 'endline', 'author')

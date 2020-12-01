@@ -1,0 +1,113 @@
+{% extends 'HS/basetea.html' %}
+
+{% block content %}
+<link href='/static/HS/packages/core/main.css' rel='stylesheet' />
+<link href='/static/HS/packages/daygrid/main.css' rel='stylesheet' />
+<script src='/static/HS/packages/core/main.js'></script>
+<script src='/static/HS/packages/interaction/main.js'></script>
+<script src='/static/HS/packages/daygrid/main.js'></script>
+<script>
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
+}
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      plugins: [ 'interaction', 'dayGrid' ],
+
+      header: {
+        left: 'prev,next',
+        center: 'title',
+        right:'today'
+      },
+
+      defaultDate: getToday(),
+      navLinks: true, // can click day/week names to navigate views
+      editable: false,
+      eventLimit: true, // allow "more" link when too many events
+
+      events: [
+       {% for i in assignments %}
+    {
+        title: "{{ i.title }}",
+        start: '{{ i.created|date:'yy-m-d' }}',
+
+    },
+    {% endfor %}
+      ]
+    });
+
+    calendar.render();
+  });
+
+</script>
+<style>
+  body {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+  #calendar {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+</style>
+
+</head>
+
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <h1 align="center">{{ assignments.all.model.ban }}</h1>
+        <div id='calendar'></div><br>
+      <a href="assignment" class="btn btn-success" type="button">add</a><br>
+    </div>
+    <div class="col-md-2">
+      <div class="card my-2">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="2-1/">2-1</a>
+                  </li>
+                  <li>
+                    <a href="2-2/">2-2</a>
+                  </li>
+                  <li>
+                    <a href="2-3/">2-3</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#">2-4</a>
+                  </li>
+                  <li>
+                    <a href="#">2-5</a>
+                  </li>
+                  <li>
+                    <a href="#">2-6</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
+{% endblock%}
+
