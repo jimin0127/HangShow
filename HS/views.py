@@ -1,4 +1,3 @@
-
 from django.contrib import auth
 from datetime import timezone
 from django.shortcuts import render, redirect
@@ -10,6 +9,8 @@ from django.shortcuts import render, redirect
 from .forms import Assignment
 from django.views.generic import ListView
 from .models import Assignment
+from .models import User
+from django.db.models import Count
 
 class AssignmentList(ListView):
     model=Assignment
@@ -17,12 +18,58 @@ class AssignmentList(ListView):
     def get_queryset(self):
         return Assignment.objects.order_by('-created')
 
-# calendar views
 def calendar(request):
-    assignment=Assignment.objects.all()
+    b = ""
+    if request.method == "GET":
+        a = request.GET['student_id']
+        b = a[1:2]
+        if(b=="1"):
+            assignment = class_2_1.objects.all()
+        elif(b=="2"):
+            assignment = class_2_2.objects.all()
+        elif (b=="3"):
+            assignment = class_2_3.objects.all()
+        elif (b=="4"):
+            assignment = class_2_4.objects.all()
+        elif (b=="5"):
+            assignment = class_2_5.objects.all()
+        else:
+            assignment = class_2_6.objects.all()
+
     return render(
         request,
-        'HS/calendartea.html',
+        'HS/calendarstu.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+
+def calendar2_1_stu(request):
+    assignment=class_2_1.objects.all()
+    return render(
+        request,
+        'HS/calendarstu.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+def calendar2_2_stu(request):
+    assignment=class_2_2.objects.all()
+    return render(
+        request,
+        'HS/calendarstu.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+def calendar2_3_stu(request):
+    assignment=class_2_3.objects.all()
+    return render(
+        request,
+        'HS/calendarstu.html',
         {
             'assignments':assignment,
         }
@@ -58,30 +105,66 @@ def calendar2_3(request):
         }
     )
 
-def index(request):
+def calendar2_4(request):
+    assignment=class_2_4.objects.all()
     return render(
         request,
-        'HS/index.html'
+        'HS/calendartea.html',
+        {
+            'assignments':assignment,
+        }
     )
 
 
-# assignment views
-def getAssignment(request):
-    if request.method=="POST":
-        form=Assignmentform(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'HS/getassignment.html', {'form': form})
-    else:
-        form = Assignmentform()
-        return render(request, 'HS/getassignment.html', {'form': form})
+def calendar2_5(request):
+    assignment=class_2_5.objects.all()
+    return render(
+        request,
+        'HS/calendartea.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+def calendar2_6(request):
+    assignment=class_2_6.objects.all()
+    return render(
+        request,
+        'HS/calendartea.html',
+        {
+            'assignments':assignment,
+        }
+    )
+
+
+def index(request):
+    class2_1=class_2_1.objects.all().aggregate(Count('title'))
+    class2_2 = class_2_2.objects.all().aggregate(Count('title'))
+    class2_3 = class_2_3.objects.all().aggregate(Count('title'))
+    class2_4 = class_2_4.objects.all().aggregate(Count('title'))
+    class2_5 = class_2_5.objects.all().aggregate(Count('title'))
+    class2_6 = class_2_6.objects.all().aggregate(Count('title'))
+
+    return render(
+        request,
+        'HS/index.html',
+        {
+            'count1':class2_1['title__count'],
+            'count2': class2_2['title__count'],
+            'count3': class2_3['title__count'],
+            'count4': class2_4['title__count'],
+            'count5': class2_5['title__count'],
+            'count6': class2_6['title__count'],
+
+        }
+    )
 
 def getAssignment2_1(request):
     if request.method=="POST":
         form=Assignmentform2_1(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'HS/getassignment.html', {'form': form})
+            return render(request, 'HS/calendartea.html', {'form': form})
     else:
         form = Assignmentform2_1()
         return render(request, 'HS/getassignment.html', {'form': form})
@@ -91,7 +174,7 @@ def getAssignment2_2(request):
         form=Assignmentform2_2(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'HS/getassignment.html', {'form': form})
+            return render(request, 'HS/calendartea.html', {'form': form})
     else:
         form = Assignmentform2_2()
         return render(request, 'HS/getassignment.html', {'form': form})
@@ -101,18 +184,47 @@ def getAssignment2_3(request):
         form=Assignmentform2_3(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, 'HS/getassignment.html', {'form': form})
+            return render(request, 'HS/calendartea.html', {'form': form})
     else:
         form = Assignmentform2_3()
         return render(request, 'HS/getassignment.html', {'form': form})
 
+def getAssignment2_4(request):
+    if request.method=="POST":
+        form=Assignmentform2_4(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/calendartea.html', {'form': form})
+    else:
+        form = Assignmentform2_4()
+        return render(request, 'HS/getassignment.html', {'form': form})
+
+def getAssignment2_5(request):
+    if request.method=="POST":
+        form=Assignmentform2_5(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/calendartea.html', {'form': form})
+    else:
+        form = Assignmentform2_5()
+        return render(request, 'HS/getassignment.html', {'form': form})
+
+def getAssignment2_6(request):
+    if request.method=="POST":
+        form=Assignmentform2_6(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'HS/calendartea.html', {'form': form})
+    else:
+        form = Assignmentform2_6()
+        return render(request, 'HS/getassignment.html', {'form': form})
 
 def join(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-        return render(request, 'HS/account.html', {'form': form})
+        return render(request, 'HS/login.html', {'form': form})
     else:
         form = UserCreationForm()
         return render(request, 'HS/account.html', {'form': form})
@@ -132,17 +244,20 @@ def login(request):
                 return render(request, 'HS/calendartea.html', {})
             else:
                 auth.login(request, user)
-                return render(request, 'HS/calendarstu.html', {})
+                return render(request, "HS/index.html", {})
         else:
             return render(request, 'HS/index.html', {'error': '에러'}) # 로그인 실패
     else:
         print("login2")
         return render(request, 'HS/login.html', {'error': '에러'})
 
+
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
         return render(request, 'HS/index.html', {'error': '에러'})
+
+
     else:
         auth.logout(request)
         return render(request, 'HS/index.html', {'error': '에러'})

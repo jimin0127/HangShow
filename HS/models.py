@@ -53,6 +53,42 @@ class class_2_3(models.Model):
     def __str__(self):
         return '{}:{}'.format(self.title, self.author)
 
+class class_2_4(models.Model):
+    ban = "2-4"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
+class class_2_5(models.Model):
+    ban = "2-5"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
+class class_2_6(models.Model):
+    ban = "2-6"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True

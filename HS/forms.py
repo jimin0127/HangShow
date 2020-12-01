@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import widgets
 
-from .models import User
+from .models import User, class_2_4, class_2_5, class_2_6
 from django.utils.translation import ugettext_lazy as _
 from .models import Assignment
 from .models import class_2_1
@@ -60,4 +60,19 @@ class Assignmentform2_2(forms.ModelForm):
 class Assignmentform2_3(forms.ModelForm):
     class Meta:
         model = class_2_3
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_4(forms.ModelForm):
+    class Meta:
+        model = class_2_4
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_5(forms.ModelForm):
+    class Meta:
+        model = class_2_5
+        fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
+
+class Assignmentform2_6(forms.ModelForm):
+    class Meta:
+        model = class_2_6
         fields = ('title', 'subject', 'content', 'created', 'endline', 'author')
