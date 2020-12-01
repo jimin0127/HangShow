@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from HangShow import settings
 
+
 class Assignment(models.Model):
     title = models.CharField(max_length=30)
     subject = models.CharField(max_length=30)
@@ -13,7 +14,44 @@ class Assignment(models.Model):
     author = models.CharField(max_length=30)
 
     def __str__(self):
-        return '{}:{}'.format(self.title,self.author)
+        return '{}:{}'.format(self.title, self.author)
+class class_2_1(models.Model):
+    ban = "2-1"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
+class class_2_2(models.Model):
+    ban = "2-2"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
+
+class class_2_3(models.Model):
+    ban = "2-3"
+    title = models.CharField(max_length=30)
+    subject = models.CharField(max_length=30)
+    content = models.TextField()
+    created = models.DateField()
+    endline = models.DateField()
+    author = models.CharField(max_length=30)
+
+    def __str__(self):
+        return '{}:{}'.format(self.title, self.author)
+
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -106,4 +144,3 @@ class User(AbstractBaseUser, PermissionsMixin):
     @property
     def is_staff(self):
         return self.is_superuser
-

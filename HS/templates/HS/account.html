@@ -1,38 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    {% load static %}
-    {% block css %}
-    <link rel="stylesheet" href="{% static 'HS/bootstrap.css' %}">
-    {% endblock css %}
+{% extends 'HS/base.html' %}
 
-</head>
 <body>
 
-
-
 {% block content %}
-    <div id="container">
-        <form action="." method="post">
-            {% csrf_token %}
-            <div>
-                {% for field in form %}
+    <form action="." method="post">
+        {% csrf_token %}
+        <div>
+            {% for field in form %}
+
                     <div class="form-group">
                         <input id="{{ field.id_for_label }}" name="{{ field.name }}" type="{{ field.field.widget.input_type }}" placeholder="{{ field.label|upper}}">
                     </div>
                     {% for error in field.errors %}
                         <label class="text-error" for="{{ field.id_for_label }}">{{ error }}</label>
                     {% endfor %}
-                {% endfor %}
-            </div>
-            <div>
-                <input type="submit" class="btn btn-primary form-control" value="join">
-            </div>
-        </form>
+            {% endfor %}
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary form-control" value="join">
+        </div>
+    </form>
     </div>
 {% endblock content %}
+
 
 </body>
 </html>
